@@ -1,0 +1,16 @@
+Thers is a readMe.pdf file in the Overview section where the projects are compeletly
+explained. Altough the text is in Persian language, almost all of the database codes
+and information (such as the ER model) can be understood just by means of provided
+figures, tables and fragments of codes.
+
+For more information in each of the following parts, you can refer to readMe.pdf.
+*Requirement collection and analysis
+	-Conseptual design - Entity-Relationship Modeling
+	-Functional analysis
+*Logical design
+	-Choosing relational model
+	-Changing the desige in to one in Boyce-Codd normal form
+	-Explaining needed Triggers and Functions
+	-Identifying different views
+	-Further details (e.g. domains, integrities)
+*Implementing the database using postgreSQL

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <title>تخفیفان</title>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'icons/coupon.ico' %}" />`
+    <link rel="stylesheet" href="{% static 'css/semantic.rtl.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+    <script src="{% static 'js/semantic.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block head %}{% endblock %}
+</head>
+{% load discounts %}
+<body class="persian" dir="rtl">
+    <form action="{% url 'search' page=1%}" method="get" style="display: none" name="search">
+        <input type="text" name="q" id="q" />
+    </form>
+    <div id="topbar" class="ui inverted sticky attached massive menu">
+        <h2 id="site-name" class="ui header orange item priority persian">
+            <img id="logo" class="ui middle aligned image" src="{% static 'images/coupon-mini.png' %}" />
+            تخفیفان
+        </h2>
+        <a class="ui orange item" href="{% url 'home'%}">
+            <i class="orange home icon"></i> خانه
+        </a>
+        <div class="ui dropdown orange item">
+            دسته‌بندی‌ها <i id="dropdown-icon" class="orange right dropdown icon"></i>
+            <div class="ui inverted menu">
+                <div id="new" class="item" url="{% url 'categories' category='new' page=1 %}">
+                    تازه‌ها
+                </div>
+                {% for category in categories %}
+                <div id="{{ category.category }}" class="item" url="{% url 'categories' category=category.category page=1 %}">
+                    {{ category.category | translate_category }}
+                </div>
+                {% endfor %}
+                <div id="all" class="item" url="{% url 'categories' category='all' page=1 %}">
+                    تمامی دسته‌ها
+                </div>
+            </div>
+        </div>
+        <div class="right menu">
+            {% if luser %}
+            <div class="ui dropdown orange item" id="profile">
+                حساب کاربری <i id="dropdown-icon" class="orange right dropdown icon"></i>
+                <div class="ui inverted menu">
+                    <div id="edit" class="item" url="{% url 'edit' %}">
+                        ویرایش مشخصات فردی
+                    </div>
+                    <div id="history" class="item" url="{% url 'history' page=1 %}">
+                        تاریخچه‌ی سفارشات
+                    </div>
+                    <div id="logout" class="item" url="{% url 'logout' %}">
+                        خروج
+                    </div>
+                </div>
+            </div>
+            <div class="ui item">
+                <button class="ui icon orange button" onclick="document.location.href={% url 'show_cart' %}">
+                    <i class="horrizontally flipped large shop icon"></i>
+                    <div class="floating ui teal label">{{ cartNum }}</div>
+                </button>
+            </div>
+            {% else %}
+            <div class="ui item">
+                <div class="ui vertical buttons">
+                    <button class="ui orange button priority persian" onclick="document.location.href='{% url 'login' %}' + '?next=' + document.location.pathname">ورود</button>
+                    <button class="ui button priority persian" onclick="document.location.href='{% url 'signup' %}' + '?next=' + document.location.pathname">ثبت نام</button>
+                </div>
+            </div>
+            {% endif %}
+            <div class="ui left aligned item">
+                <div class="ui action input">
+                    <input class="high priority persian" type="text" placeholder="تخفیفان را جست‌و‌جو کنید..." id="q-fake" >
+                    <button class="ui orange icon button" onclick="searchClick();" id="searchButton">
+                        <i class="search link icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui hidden clearing divider"></div>
+    {% block body %}{% endblock %}
+    <div class="ui clearing divider"></div>
+    <div class="ui centered grid">
+        <div class="column">
+            <div class="ui large label">
+                <i class="yellow large warning sign icon"></i>
+                این سایت تنها به منظور کارهای آموزشی ساخته شده است و هیچکدام از محتویات آن واقعی نیستند.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

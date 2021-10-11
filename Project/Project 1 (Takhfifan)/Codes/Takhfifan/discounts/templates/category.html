@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/category.css' %}" />
+<script src="{% static 'js/category.js' %}"></script>
+{% endblock %}
+{% block body %}
+{% load discounts %}
+<div id="content" class="ui fluid container">
+    <!-- five centered column stackable grid -->
+    {% if not empty %}
+    <div class="ui four stackable doubling special cards">
+        {% for discount in discounts %}
+        <div class="orange card column">
+            <div class="blurring dimmable image">
+                <div class="ui dimmer">
+                    <div class="content">
+                        <div class="center">
+                            <div class="ui celled three column centered grid">
+                                <div class="column">
+                                    ارزش واقعی:
+                                    <br />
+                                    <br />
+                                    <div class="ui large red label">{{ discount.price }}</div>
+                                </div>
+                                <div class="column">
+                                    پرداخت شما:
+                                    <br />
+                                    <br />
+                                    <div class="ui large teal label">
+                                        {{ discount.price|off_price:discount.discount }}
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="ui inverted orange button priority persian" onclick="document.location.href = '{% url 'discount' discount_id=discount.id %}';">مشاهده‌ تخفیفان</button>
+                        </div>
+                    </div>
+                </div>
+                <img src="{% static 'images/image.png' %}">
+            </div>
+            <div class="content">
+                <a class="header persian">{{ discount.title }}</a>
+                <div class="meta">
+                    <span>
+                        <i class="tag icon"></i> {{ discount.discount }}% تخفیف
+                    </span>
+                </div>
+            </div>
+            <div class="extra content">
+                <a>
+                    <i class="shopping bag icon"></i>
+                    {{ discount.count }} نفر این تخفیفان را گرفته‌اند.
+                </a>
+            </div>
+            <div class="ui bottom attached teal progress" data-percent="{{ discount.total|bought_percent:discount.count }}">
+                <div class="bar"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="ui centered grid">
+        <div class="eight wide column">
+            <div class="ui orange segment">
+                <div class="ui header high priority persian">
+                    متأسفانه محتوایی برای نمایش وجود ندارد.
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="ui hidden clearing divider"></div>
+    <div class="ui centered one column grid">
+        <div class="column">
+            <div class="ui inverted compact borderless menu">
+                {% for i in pagerange %}
+                <a class="inverted orange item{% if currentpage == i %} active{% endif %}"{% if currentpage != i %} href="{% if query_string %}{% url 'search' page=i%}{{ query_string }}{% else %}{% url 'categories' category=currentcategory page=i %}{% endif %}"{% endif %}>{{ i }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

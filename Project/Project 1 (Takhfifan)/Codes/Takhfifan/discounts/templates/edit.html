@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="ui form" action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="act" value="update" />
+    <div class="ui three column centered grid">
+        <div class="three column centered row">
+            <div class="column">
+                <div class="ui centered grid container segment">
+                    <div class="left aligned row">
+                        <div class="column">
+                            <h2 class="ui dividing header priority persian">ویرایش مشخصات فردی</h2>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="required field">
+                                <label for="firstname">نام:</label>
+                                <input type="text" name="name" placeholder="نام کامل شما" required="true" value="{{ the_luser.name }}" class="very high priority persian" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="field">
+                                <label for="phone">تلفن همراه:</label>
+                                <input type="tel" name="phone" placeholder="تلفن همراه" value="{{ the_luser.cell }}" dir="ltr" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right aligned row">
+                        <div class="column">
+                            <button type="submit" class="ui orange button priority persian">ثبت تغییرات</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<form class="ui form" action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="act" value="pass" />
+    <div class="ui three column centered grid">
+        <div class="three column centered row">
+            <div class="column">
+                <div class="ui centered grid container piled segment">
+                    <div class="left aligned row">
+                        <div class="column">
+                            <h2 class="ui dividing header priority persian">تغییر رمز عبور</h2>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="required field">
+                                <label for="pass">رمز عبور:</label>
+                                <input type="password" name="pass" placeholder="رمز عبور" dir="ltr" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right aligned row">
+                        <div class="column">
+                            <button type="submit" class="ui red button priority persian">تغییر رمز عبور</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

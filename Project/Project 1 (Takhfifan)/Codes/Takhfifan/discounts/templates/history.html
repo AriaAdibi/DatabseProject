@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block head %}
+{% load staticfiles %}
+<script src="{% static 'js/moment-with-locales.js' %}"></script>
+<script src="{% static 'js/history.js' %}"></script>
+{% endblock %}
+{% block body %}
+<div id="content" class="ui fluid container">
+    {% if not empty %}
+    <div class="ui three column centered grid">
+        <div class="three column row">
+            <div class="column">
+                <table class="ui orange single line table">
+                    <thead>
+                        <tr>
+                            <th>عنوان تخفیفان</th>
+                            <th>تعداد</th>
+                            <th>تاریخ خرید</th>
+                            <th>کد تخفیف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.title }}</td>
+                            <td>{{ order.count }}</td>
+                            <td class="date">{{ order.date }}</td>
+                            <td>{{ order.code }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">
+                                <div class="ui right floated pagination menu">
+                                    {% for i in pagerange %}
+                                    <a class="orange item{% if currentpage == i %} active{% endif %}"{% if currentpage != i %} href="{% if query_string %}{% url 'search' page=i%}{{ query_string }}{% else %}{% url 'history' page=i %}{% endif %}"{% endif %}>{{ i }}</a>
+                                    {% endfor %}
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="ui centered grid">
+        <div class="eight wide column">
+            <div class="ui orange segment">
+                <div class="ui header  high priority persian">
+                    متأسفانه محتوایی برای نمایش وجود ندارد.
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

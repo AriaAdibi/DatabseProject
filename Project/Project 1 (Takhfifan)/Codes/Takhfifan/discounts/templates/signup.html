@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="ui form" action="{% if next %}?next={{ next }}{% endif %}" method="post">
+    {% csrf_token %}
+    <div id="content" class="ui two column centered grid">
+        <div class="two column centered row">
+            <div class="column">
+                <div class="ui centered grid container segment">
+                    <div class="left aligned row">
+                        <div class="column">
+                            <h2 class="ui dividing header priority persian">فرم ثبت نام</h2>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="two fields">
+                                <div class="required field">
+                                    <label for="firstname">نام:</label>
+                                    <input type="text" name="firstname" placeholder="نام" required="true" />
+                                </div>
+                                <div class="required field">
+                                    <label for="lastname">نام خانوادگی:</label>
+                                    <input type="text" name="lastname" placeholder="نام خانوادگی" required="true" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="phone">تلفن همراه:</label>
+                                    <input type="tel" name="phone" placeholder="تلفن همراه" dir="ltr" />
+                                </div>
+                                <div class="required field">
+                                    <label for="email">ایمیل:</label>
+                                    <input type="email" name="email" placeholder="آدرس ایمیل" dir="ltr" required="true" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="required field">
+                                <label for="pass">رمز عبور:</label>
+                                <input type="password" name="pass" placeholder="رمز عبور" dir="ltr" required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right aligned row">
+                        <div class="column">
+                            <button type="submit" class="ui orange button priority persian">ثبت نام</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

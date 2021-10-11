@@ -1,0 +1,60 @@
+@@font-face {
+    font-family: 'B Nazanin';
+    src: url('../fonts/B nazanin.ttf');
+}
+
+@@font-face {
+    font-family: 'B Nazanin';
+    src: url('../fonts/B nazanin Bold.ttf');
+    font-weight: bold;
+}
+
+.persian, .persian *, .priority.persian, .high.priority.persian, .very.high.priority.persian {
+    font-family: 'B Nazanin'
+}
+
+/*#topbar {
+    background-color: #eee;
+}*/
+
+#site-name, #site-name * {
+    transition: all 0.5s ease !important;
+}
+
+.ui.menu .ui.dropdown .menu>.item {
+    background: 0 0 !important;
+    color: rgba(255,255,255,.9) !important;
+}
+
+.ui.menu .ui.dropdown .menu>.item:hover {
+    background: rgba(255,255,255,.08) !important;
+    color: #fff !important;
+}
+
+.ui.menu .ui.dropdown .menu {
+    border: 0 solid transparent !important;
+    background: #1B1C1D !important;
+    box-shadow: none !important;
+}
+
+#dropdown-icon {
+    transition: all 300ms;
+}
+
+.ui.dropdown:hover #dropdown-icon {
+    color: white !important;
+}
+
+#logo {
+    width: 40px;
+    height: 40px;
+}
+
+#content {
+    padding: 20px;
+}
+
+#content .persian, #content .priority.persian, #content .high.priority.persian, #content .a.very.high.priority.persian {
+    font-family: 'B Nazanin';
+}
+

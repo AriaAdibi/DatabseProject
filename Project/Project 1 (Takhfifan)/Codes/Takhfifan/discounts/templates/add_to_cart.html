@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="ui form" action="{% if next %}?next={{ next }}{% endif %}" method="post">
+    {% csrf_token %}
+    <div id="content" class="ui three column centered grid">
+        <div class="three column centered row">
+            <div class="column">
+                <div class="ui centered grid container raised segment">
+                    <div class="left aligned row">
+                        <div class="column">
+                            <h2 class="ui dividing header priority persian">افزودن به سبد خرید</h2>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="ui orange large tag label">{{ discount.title }}</div>
+                        </div>
+                    </div>
+                    <div class="left aligned row">
+                        <div class="column">
+                            <div class="required field">
+                                <label for="email">تعداد:</label>
+                                <input type="number" name="num" placeholder="تعداد" min="1" max="10" required="true" value="1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right aligned row">
+                        <div class="column">
+                            <button type="submit" class="ui orange button priority persian">افزودن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

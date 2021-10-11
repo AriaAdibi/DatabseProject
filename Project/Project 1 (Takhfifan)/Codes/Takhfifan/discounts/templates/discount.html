@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/discount.css' %}" />
+<script src="{% static 'js/moment-with-locales.js' %}"></script>
+<script src="{% static 'js/moment-precise-range.js' %}"></script>
+<script lang="javascript">
+var expire = moment('{{ discount.expire }}', 'MMM D, YYYY, h:mm a');
+</script>
+<script src="{% static 'js/discount.js' %}"></script>
+{% endblock %}
+{% block body %}
+{% load discounts %}
+<div id="content" class="ui fluid container">
+    <h1 class="ui orange header priority persian">{{ discount.title }}</h1>
+    <div class="ui top attached segment">
+        <div class="ui internally celled grid">
+            <div class="eleven wide column">
+                <div class="ui two column internally celled centered grid">
+                    <div class="column">
+                        <i class="ui huge orange tag icon"></i>
+                        <span class="ui orange header">
+                            {{ discount.discount }} درصد تخفیف
+                        </span>
+                    </div>
+                    <div class="two column row">
+                        <div class="column">
+                            <div class="ui teal small statistic">
+                                <div class="value high priority persian">
+                                    {{ discount.price|off_price:discount.discount }} تومان
+                                </div>
+                                <div class="label high priority persian">
+                                    پرداخت شما
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui orange small statistic">
+                                <div class="value high priority persian">
+                                    {{ discount.price }} تومان
+                                </div>
+                                <div class="label high priority persian">
+                                    قیمت اصلی
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="three column row" id="time">
+                        <div class="column" id="days"></div>
+                        <div class="column" id="hours"></div>
+                        <div class="column" id="minutes"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="five wide column">
+                <img class="ui image" src="{% static 'images/image.png' %}" />
+            </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="ui small fluid orange progress" data-percent="{{ discount.total|bought_percent:discount.count }}">
+            <div class="bar"></div>
+            <div class="label">
+                {{ discount.count }} از {{ discount.total }} تخفیفان خریده شده
+            </div>
+        </div>
+    </div>
+    <button class="ui bottom attached labeled icon fluid orange button priority persian" onclick="document.location.href = '{% url 'add_to_cart' couponID=discount.id %}'">
+        <i class="horizontally flipped add to cart icon"></i>
+        افزودن به سبد خرید
+    </button>
+    <div class="ui hidden clearing divider"></div>
+    <div class="ui grid">
+        <div class="three wide column">
+            <div class="ui orange vertical fluid tabular menu" id="info">
+                <a class="item active" data-tab="lineaments">ویژگی‌ها</a>
+                <a class="item" data-tab="conditions">شرایط استفاده</a>
+                <a class="item" data-tab="description">توضیحات</a>
+                <a class="item" data-tab="about">درباره‌ی شرکت</a>
+            </div>
+        </div>
+        <div class="thirteen wide stretched column">
+            <div class="ui orange segment">
+                <div class="ui tab active" data-tab="lineaments">
+                    {{ discount.lineaments }}
+                </div>
+                <div class="ui tab" data-tab="conditions">
+                    {{ discount.conditions }}
+                </div>
+                <div class="ui orange tab" data-tab="description">
+                    {{ discount.description }}
+                </div>
+                <div class="ui orange tab" data-tab="about">
+                    نام: {{ discount.companyName }}
+                    <br />
+                    نشانی: {{ discount.companyAddress }}
+                    <br />
+                    شماره‌ی تماس:
+                    <pre>{% for phone in discount.phones %}
+                        {{ phone }}{% empty %}                      موجود نیست.{% endfor %}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
