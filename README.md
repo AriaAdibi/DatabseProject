@@ -13,4 +13,4 @@ In this project two *Coupon Sites* are implemented, where emphasis is on the des
 - Implementing the database using `postgreSQL`
 
 ----
-There is a [**readMe.pdf**](https://github.com/AriaAdibi/DatabseProject/blob/main/Overview/readMe.pdf) file in the Overview section where the projects are completely explained. Although, the text is in Persian language, almost all of the database codes and information (such as the ER model) can be understood just by the means of provided figures, tables and fragments of codes.
+There is a [**readMe.pdf**](./Overview/readMe.pdf) file in the Overview section where the projects are completely explained. Although, the text is in Persian language, almost all of the database codes and information (such as the ER model) can be understood just by the means of provided figures, tables and fragments of codes.
